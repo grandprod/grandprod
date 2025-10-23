@@ -22,8 +22,14 @@ export type BaseStat =
   | 'GoldGain'
   | 'FavorGain';
 
-export type SubStat = 'FreezeChance' | 'PoisonChance';
+export type ConditionStat =
+  | 'FreezeChance'
+  | 'PoisonChance'
+  | 'ChillChance'
+  | 'BurnChance'
+  | 'BleedChance'
+  | 'CurseChance';
 
-export type GameStat = BaseStat | SubStat;
+export type GameStat = BaseStat | ConditionStat;
 
 export type StatBlock = Record<GameStat, number>;

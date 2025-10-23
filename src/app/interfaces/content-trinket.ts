@@ -11,4 +11,5 @@ export type TrinketContent = IsContentItem &
     id: TrinketId;
     baseStats: StatBlock;
     upgradeableStats: GameStat[];
+    unlockCost: number;
   };

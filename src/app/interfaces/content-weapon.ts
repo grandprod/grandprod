@@ -11,4 +11,5 @@ export type WeaponContent = IsContentItem &
     id: WeaponId;
     baseStats: StatBlock;
     upgradeableStats: GameStat[];
+    unlockCost: number;
   };

@@ -50,6 +50,8 @@ function ensureHero(hero: Partial<HeroContent>): Required<HeroContent> {
     baseStats: ensureStats(hero.baseStats),
     statsPerLevel: ensureStats(hero.statsPerLevel),
     startingWeaponIds: hero.startingWeaponIds ?? [],
+    unlockCost: hero.unlockCost ?? 0,
+    trinketUnlock: hero.trinketUnlock ?? ('UNKNOWN' as TrinketId),
   };
 }
 
@@ -58,10 +60,12 @@ function ensureItem(item: Partial<ItemContent>): Required<ItemContent> {
     id: item.id ?? ('UNKNOWN' as ItemId),
     name: item.name ?? 'UNKNOWN',
     __type: 'item',
+    rarity: item.rarity ?? 'Common',
     description: item.description ?? 'UNKNOWN',
     sprite: item.sprite ?? 'UNKNOWN',
     baseStats: ensureStats(item.baseStats),
     statsPerLevel: ensureStats(item.statsPerLevel),
+    unlockCost: item.unlockCost ?? 0,
   };
 }
 
@@ -91,6 +95,7 @@ function ensurePet(pet: Partial<PetContent>): Required<PetContent> {
     baseStats: ensureStats(pet.baseStats),
     statsPerLevel: ensureStats(pet.statsPerLevel),
     itemIds: pet.itemIds ?? [],
+    unlockCost: pet.unlockCost ?? 0,
   };
 }
 
@@ -114,6 +119,7 @@ function ensureTrinket(
     sprite: trinket.sprite ?? 'UNKNOWN',
     baseStats: ensureStats(trinket.baseStats),
     upgradeableStats: trinket.upgradeableStats ?? [],
+    unlockCost: trinket.unlockCost ?? 0,
   };
 }
 
@@ -126,5 +132,6 @@ function ensureWeapon(weapon: Partial<WeaponContent>): Required<WeaponContent> {
     sprite: weapon.sprite ?? 'UNKNOWN',
     baseStats: ensureStats(weapon.baseStats),
     upgradeableStats: weapon.upgradeableStats ?? [],
+    unlockCost: weapon.unlockCost ?? 0,
   };
 }
