@@ -5,6 +5,7 @@
     "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "motivesoft.vscode-uuid-generator"
   ]
 }

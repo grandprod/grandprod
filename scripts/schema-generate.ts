@@ -66,6 +66,23 @@ function fixSchema(schema: any): any {
         }
       }
 
+      // Fix StatBlock objects and similar Record types to make all properties optional
+      const statBlockKeys = ['baseStats', 'statsPerLevel'];
+
+      if (statBlockKeys.includes(key)) {
+        if (
+          processedValue &&
+          processedValue.properties &&
+          processedValue.required
+        ) {
+          // Make all StatBlock properties optional
+          delete processedValue.required;
+          processedValue.title = key;
+          processedValue.description =
+            'Stat block - you can specify any combination of stat values';
+        }
+      }
+
       // Fix all ID-related arrays to be arrays of strings (run after processing)
       if (
         key.includes('Id') &&
@@ -82,6 +99,24 @@ function fixSchema(schema: any): any {
       }
 
       processed[key] = processedValue;
+    }
+
+    // Remove certain properties from required arrays
+    if (processed.required && Array.isArray(processed.required)) {
+      const fieldsToMakeOptional = [
+        // Build-time generated fields
+        '__type',
+      ];
+
+      // Filter out fields that should be optional
+      processed.required = processed.required.filter(
+        (field: string) => !fieldsToMakeOptional.includes(field),
+      );
+
+      // If no required fields left, remove the required array entirely
+      if (processed.required.length === 0) {
+        delete processed.required;
+      }
     }
 
     return processed;
@@ -165,19 +200,13 @@ const settings = {
 // Create a program from the actual interface files
 const program = TJS.getProgramFromFiles(
   [
-    path.resolve(__dirname, '../src/app/interfaces/content-equipment.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-skill.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-talent.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-statuseffect.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-currency.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-guardian.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-festival.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-talenttree.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-locationupgrade.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-townupgrade.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-trait-equipment.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-trait-location.ts'),
-    path.resolve(__dirname, '../src/app/interfaces/content-worldconfig.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-hero.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-item.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-monster.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-pet.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-stage.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-trinket.ts'),
+    path.resolve(__dirname, '../src/app/interfaces/content-weapon.ts'),
   ],
   {
     strictNullChecks: false, // Disabled to handle complex types
@@ -202,71 +231,14 @@ const program = TJS.getProgramFromFiles(
 // Equipment types (armor, accessory, trinket, weapon) all use the same EquipmentItemContent interface
 const contentTypeMap = {
   // Individual content types with their specific interfaces
-  skill: 'EquipmentSkillContent',
-  talent: 'TalentContent',
-  statuseffect: 'StatusEffectContent',
-  currency: 'CurrencyContent',
-  guardian: 'GuardianContent',
-  festival: 'FestivalContent',
-  talenttree: 'TalentTreeContent',
-  townupgrade: 'TownUpgradeContent',
-  locationupgrade: 'LocationUpgradeContent',
-  traitequipment: 'TraitEquipmentContent',
-  traitlocation: 'TraitLocationContent',
-  worldconfig: 'WorldConfigContent',
+  hero: 'HeroContent',
+  item: 'ItemContent',
+  monster: 'MonsterContent',
+  pet: 'PetContent',
+  stage: 'StageContent',
+  trinket: 'TrinketContent',
+  weapon: 'WeaponContent',
 };
-
-// Equipment types that all use the same schema
-const equipmentTypes = ['accessory', 'armor', 'trinket', 'weapon'];
-
-// Generate schemas for equipment types (all use the same interface)
-console.log(
-  'Generating equipment schema from EquipmentItemContent interface...',
-);
-try {
-  let equipmentSchema = TJS.generateSchema(
-    program,
-    'EquipmentItemContent',
-    settings,
-  );
-
-  if (equipmentSchema) {
-    // Fix schema issues
-    equipmentSchema = postProcessIdArrays(fixSchema(equipmentSchema));
-
-    // Convert single item schema to array schema for YAML content files
-    const arraySchema = {
-      $schema: 'http://json-schema.org/draft-07/schema#',
-      title: 'Equipment content schema',
-      description:
-        'JSON schema for equipment YAML content files (armor, accessory, trinket, weapon), automatically generated from TypeScript interfaces',
-      type: 'array',
-      items: equipmentSchema,
-    };
-
-    // Generate the same schema for all equipment types
-    for (const equipmentType of equipmentTypes) {
-      const customSchema = {
-        ...arraySchema,
-        title: `${equipmentType.charAt(0).toUpperCase() + equipmentType.slice(1)} content schema`,
-        description: `JSON schema for ${equipmentType} YAML content files, automatically generated from TypeScript interfaces`,
-      };
-
-      const schemaPath = path.join(schemasDir, `${equipmentType}.schema.json`);
-      fs.writeJsonSync(schemaPath, customSchema, { spaces: 2 });
-      console.log(`✓ Generated schema: ${schemaPath}`);
-    }
-  } else {
-    console.warn(
-      'Could not generate equipment schema from EquipmentItemContent',
-    );
-  }
-} catch (error: any) {
-  console.error(
-    'Error generating equipment schema:',
-    error?.message || 'Unknown error',
-  );
-}
 
 // Generate schemas for other content types
 for (const [contentType, typeName] of Object.entries(contentTypeMap)) {

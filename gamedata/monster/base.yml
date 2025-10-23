@@ -1,5 +1,6 @@
 - id: 46aac966-48c0-4b4c-84ed-a371bb65acba
   name: Goblin
+  description: Just a tiny lil guy
 
   sprite: '0004'
   frames: 4
@@ -14,6 +15,7 @@
 
 - id: 3557a467-d17b-4ef1-a7ee-4eb51ae98759
   name: Kobold
+  description: Slightly bigger threat than a goblin
 
   sprite: '0000'
   frames: 4
@@ -28,6 +30,7 @@
 
 - id: d7b75e59-3309-44e0-a293-cf5f9303658a
   name: Hobgoblin
+  description: Bigger and meaner
 
   sprite: '0008'
   frames: 4
@@ -42,6 +45,7 @@
 
 - id: 5b4508dc-b7ac-4089-8d30-95fd94f8824e
   name: Ogre
+  description: Many layers, much damage
 
   sprite: '0012'
   frames: 4

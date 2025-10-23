@@ -14,21 +14,12 @@
   "eslint.validate": ["typescript", "javascript"],
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "yaml.schemas": {
-    "./schemas/armor.schema.json": "gamedata/armor/*.yml",
-    "./schemas/accessory.schema.json": "gamedata/accessory/*.yml",
+    "./schemas/hero.schema.json": "gamedata/hero/*.yml",
+    "./schemas/item.schema.json": "gamedata/item/*.yml",
+    "./schemas/monster.schema.json": "gamedata/monster/*.yml",
+    "./schemas/pet.schema.json": "gamedata/pet/*.yml",
+    "./schemas/stage.schema.json": "gamedata/stage/*.yml",
     "./schemas/trinket.schema.json": "gamedata/trinket/*.yml",
-    "./schemas/weapon.schema.json": "gamedata/weapon/*.yml",
-    "./schemas/skill.schema.json": "gamedata/skill/*.yml",
-    "./schemas/talent.schema.json": "gamedata/talent/*.yml",
-    "./schemas/statuseffect.schema.json": "gamedata/statuseffect/*.yml",
-    "./schemas/guardian.schema.json": "gamedata/guardian/*.yml",
-    "./schemas/locationupgrade.schema.json": "gamedata/locationupgrade/*.yml",
-    "./schemas/currency.schema.json": "gamedata/currency/*.yml",
-    "./schemas/festival.schema.json": "gamedata/festival/*.yml",
-    "./schemas/talenttree.schema.json": "gamedata/talenttree/*.yml",
-    "./schemas/townupgrade.schema.json": "gamedata/townupgrade/*.yml",
-    "./schemas/traitequipment.schema.json": "gamedata/traitequipment/*.yml",
-    "./schemas/traitlocation.schema.json": "gamedata/traitlocation/*.yml",
-    "./schemas/worldconfig.schema.json": "gamedata/worldconfig/*.yml"
+    "./schemas/weapon.schema.json": "gamedata/weapon/*.yml"
   }
 }
