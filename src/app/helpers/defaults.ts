@@ -44,5 +44,9 @@ export function defaultStats(): StatBlock {
     FavorGain: 0,
     FreezeChance: 0,
     PoisonChance: 0,
+    ChillChance: 0,
+    BurnChance: 0,
+    BleedChance: 0,
+    CurseChance: 0,
   };
 }
