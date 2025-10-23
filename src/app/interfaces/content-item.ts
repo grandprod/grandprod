@@ -9,6 +9,10 @@ export type ItemContent = IsContentItem &
   HasDescription &
   HasSprite & {
     id: ItemId;
+    rarity: ItemRarity;
     baseStats: StatBlock;
     statsPerLevel: StatBlock;
+    unlockCost: number;
   };
+
+export type ItemRarity = 'Common' | 'Uncommon' | 'Epic' | 'Legendary';

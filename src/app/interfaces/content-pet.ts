@@ -11,6 +11,6 @@ export type PetContent = IsContentItem &
     id: PetId;
     baseStats: StatBlock;
     statsPerLevel: StatBlock;
-
     itemIds: string[];
+    unlockCost: number;
   };
