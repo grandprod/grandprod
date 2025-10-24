@@ -30,6 +30,11 @@
 - `npm run gamedata:art:spritesheets` - regenerate the spritesheets
 - `npm run build` - do a prod build of the application (mostly unneeded during development)
 - `npm run bump:<major|minor|patch>` - bump the version in package.json, generate changelogs, create a git tag, commit and push the changes (which spawns the release creation process to automatically build an electron release)
+- `npx ng g c <component-name>` - generate a new Angular component
+
+### Component Organization
+
+Components are stored flat in a folder (no nested folders) under `src/app/components/`. They are named a bit backwards for grouping purposes. Rather than `hero-icon` and `weapon-icon` they are named `icon-hero` and `icon-weapon` so that all `icon` components are grouped together when sorted alphabetically.
 
 ### Adding New Content
 

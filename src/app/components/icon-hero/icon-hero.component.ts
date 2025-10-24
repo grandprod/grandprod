@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import type { Hero } from '@interfaces';
 import { AtlasAnimationComponent } from '@components/atlas-animation/atlas-animation.component';
+import type { HeroContent } from '@interfaces';
 
 @Component({
   selector: 'app-icon-hero',
@@ -9,5 +9,5 @@ import { AtlasAnimationComponent } from '@components/atlas-animation/atlas-anima
   styleUrl: './icon-hero.component.scss',
 })
 export class IconHeroComponent {
-  public hero = input.required<Hero>();
+  public hero = input.required<HeroContent>();
 }

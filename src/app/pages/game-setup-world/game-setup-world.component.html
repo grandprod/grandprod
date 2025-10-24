@@ -1,50 +1,93 @@
-<div class="flex justify-center items-center h-full p-2 flex-col gap-2">
-  <div class="w-full lg:max-w-[800px]">
-    <div class="card bg-base-100">
-      <div class="card-body items-center justify-between">
-        <div class="card-title text-center flex flex-col">Choose a Hero</div>
+<div class="flex justify-between h-full p-2 flex-row gap-2">
+  <div class="flex-2 flex flex-col gap-2">
+    <div class="w-full">
+      <div class="card bg-base-100">
+        <div class="card-body items-center justify-between">
+          <div class="card-title text-center flex flex-col">Choose a Hero</div>
 
-        <div class="card-actions pt-3 flex flex-row gap-2">
-          <div class="flex flex-row justify-center gap-2 flex-wrap"></div>
+          <div class="card-actions pt-3 flex flex-row gap-2">
+            <div class="flex flex-row gap-2 flex-wrap">
+              @for (hero of allHeroes(); track $index) {
+                <app-icon-hero
+                  [hero]="hero"
+                  (click)="chooseHero(hero)"
+                  class="cursor-pointer border border-gray-200 bg-gray-600"
+                  [class.border-primary]="chosenHero() === hero"
+                ></app-icon-hero>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <div class="card bg-base-100">
+        <div class="card-body items-center justify-between">
+          <div class="card-title text-center flex flex-col">World Seed</div>
+
+          <div
+            class="text-center flex flex-row justify-center gap-2 italic px-[15%]"
+          >
+            The world seed is used to generate the world. You can use a custom
+            seed or leave it empty to let the game generate one for you.
+          </div>
+
+          <input
+            type="text"
+            class="input input-bordered w-full"
+            placeholder="Enter world seed..."
+            [(ngModel)]="worldSeed"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <div class="card bg-base-100">
+        <div class="card-body items-center justify-between">
+          <button
+            class="btn btn-primary btn-block"
+            [disabled]="!chosenHero()"
+            (click)="createWorld()"
+            appSfx="ui-click"
+            [sfxTrigger]="['click', 'hover']"
+          >
+            Start Game
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="w-full lg:max-w-[800px]">
-    <div class="card bg-base-100">
-      <div class="card-body items-center justify-between">
-        <div class="card-title text-center flex flex-col">World Seed</div>
+  <div class="flex-1 flex">
+    @if (chosenHero(); as hero) {
+      <div class="card bg-base-100 w-full">
+        <div class="card-body">
+          <div class="card-title text-center flex flex-col">
+            {{ hero.name }}
+          </div>
 
-        <div
-          class="text-center flex flex-row justify-center gap-2 italic px-[15%]"
-        >
-          The world seed is used to generate the world. You can use a custom
-          seed or leave it empty to let the game generate one for you.
+          <div class="text-center italic">
+            {{ hero.description }}
+          </div>
+
+          <div class="text-lg">Starting Weapons</div>
+
+          @for (item of heroWeapons(); track $index) {
+            <div class="flex gap-2 items-center">
+              <app-icon-weapon [weapon]="item"></app-icon-weapon>
+              <app-content-name [id]="item.id"></app-content-name>
+            </div>
+          }
+
+          <div class="text-lg">Level Up Stats</div>
+
+          @for (stat of heroLevelupStats(); track $index) {
+            <div>+{{ hero.statsPerLevel[stat] }} {{ stat }}</div>
+          }
         </div>
-
-        <input
-          type="text"
-          class="input input-bordered w-full"
-          placeholder="Enter world seed..."
-          [(ngModel)]="worldSeed"
-        />
       </div>
-    </div>
-  </div>
-
-  <div class="w-full lg:max-w-[800px]">
-    <div class="card bg-base-100">
-      <div class="card-body items-center justify-between">
-        <button
-          class="btn btn-primary btn-block"
-          (click)="createWorld()"
-          appSfx="ui-click"
-          [sfxTrigger]="['click', 'hover']"
-        >
-          Start Game
-        </button>
-      </div>
-    </div>
+    }
   </div>
 </div>
