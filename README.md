@@ -36,6 +36,10 @@
 
 Components are stored flat in a folder (no nested folders) under `src/app/components/`. They are named a bit backwards for grouping purposes. Rather than `hero-icon` and `weapon-icon` they are named `icon-hero` and `icon-weapon` so that all `icon` components are grouped together when sorted alphabetically.
 
+### Git Commits
+
+When auto-generating a changelog, only commits that follow the Conventional Commits specification are included. See [here](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines) for examples.
+
 ### Adding New Content
 
 1. Create a new file in the `gamedata/{type}` directory for your content (or use an existing file).
