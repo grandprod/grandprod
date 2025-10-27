@@ -38,7 +38,7 @@ export async function gameloop(totalTicks: number): Promise<void> {
   const numTicks = clamp(ticksToCalculate, 1, 3600);
 
   const timer = new LoggerTimer({
-    dumpThreshold: 100,
+    dumpThreshold: 25,
     isActive: getOption('debugGameloopTimerUpdates'),
   });
 
@@ -62,7 +62,8 @@ export async function gameloop(totalTicks: number): Promise<void> {
   gamestateTickEnd();
 
   const currentTick = timerTicksElapsed();
-  const nextSaveTick = timerLastSaveTick() + getOption('debugSaveInterval');
+  const nextSaveTick =
+    timerLastSaveTick() + getOption('debugSaveInterval') * 10;
   if (currentTick >= nextSaveTick) {
     updateGamestate((state) => {
       state.clock.lastSaveTick = currentTick;
