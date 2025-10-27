@@ -12,3 +12,12 @@ export function setPlayer(newPlayer: GameEntityPlayer): void {
 export function playerStatGet(stat: GameStat): number {
   return characterGetStat(gamestate().player, stat);
 }
+
+export function playerStatIncrease(stat: GameStat, amount: number): void {
+  updateGamestate((state) => {
+    const player = state.player;
+    const currentValue = characterGetStat(player, stat);
+    player.currentStats[stat] = currentValue + amount;
+    return state;
+  });
+}

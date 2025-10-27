@@ -7,6 +7,7 @@ import { gameloopPlayerAttack } from '@helpers/gameloop-playerattack';
 import { gameloopSpawnInteractables } from '@helpers/gameloop-spawninteractables';
 import { gameloopSpawnMonsters } from '@helpers/gameloop-spawnmonsters';
 import { debug } from '@helpers/logging';
+import { playerStatIncrease } from '@helpers/player';
 import { schedulerYield } from '@helpers/scheduler';
 import { isSetup } from '@helpers/setup';
 import {
@@ -49,6 +50,8 @@ export async function gameloop(totalTicks: number): Promise<void> {
   gameloopMoveMonsters();
   gameloopSpawnMonsters();
   gameloopSpawnInteractables();
+
+  playerStatIncrease('Difficulty', numTicks * 0.001);
 
   timer.stopTimer('gameloop');
 
