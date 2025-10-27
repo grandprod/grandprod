@@ -24,6 +24,7 @@
     Health: 7
     Damage: 2
     MovementSpeed: 0.2
+    AttackRange: 1
 
   statsPerLevel:
     Health: 0.5
@@ -41,6 +42,7 @@
     Health: 15
     Damage: 3
     MovementSpeed: 0.3
+    AttackRange: 1
 
   statsPerLevel:
     Health: 1
@@ -63,3 +65,4 @@
     Health: 2
     Damage: 1
     MovementSpeed: 0.01
+    AttackRange: 0
