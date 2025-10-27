@@ -1,6 +1,11 @@
 import { LoggerTimer } from 'logger-timer';
 
 import { computed } from '@angular/core';
+import { gameloopMonsterAttack } from '@helpers/gameloop-monsterattack';
+import { gameloopMoveMonsters } from '@helpers/gameloop-movemonsters';
+import { gameloopPlayerAttack } from '@helpers/gameloop-playerattack';
+import { gameloopSpawnInteractables } from '@helpers/gameloop-spawninteractables';
+import { gameloopSpawnMonsters } from '@helpers/gameloop-spawnmonsters';
 import { debug } from '@helpers/logging';
 import { schedulerYield } from '@helpers/scheduler';
 import { isSetup } from '@helpers/setup';
@@ -39,7 +44,13 @@ export async function gameloop(totalTicks: number): Promise<void> {
 
   timer.startTimer('gameloop');
 
-  // TODO: game logic (lol)
+  gameloopPlayerAttack();
+  gameloopMonsterAttack();
+  gameloopMoveMonsters();
+  gameloopSpawnMonsters();
+  gameloopSpawnInteractables();
+
+  timer.stopTimer('gameloop');
 
   timer.dumpTimers((timers) => debug('Gameloop:Timers', timers));
 

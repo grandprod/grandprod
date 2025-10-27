@@ -1,5 +1,11 @@
 import { rngUuid } from '@helpers/rng';
-import type { GameId, GameState, StatBlock } from '@interfaces';
+import type {
+  GameEntityId,
+  GameId,
+  GameState,
+  HeroId,
+  StatBlock,
+} from '@interfaces';
 
 export function defaultGameState(): GameState {
   return {
@@ -14,7 +20,21 @@ export function defaultGameState(): GameState {
       numTicks: 0,
       lastSaveTick: 0,
     },
-    world: {},
+    world: {
+      entities: [],
+      currentStage: 1,
+    },
+    player: {
+      id: '' as GameEntityId,
+      heroId: '' as HeroId,
+      name: 'Player',
+      type: 'Player',
+      currentHP: 100,
+      currentStats: defaultStats(),
+      currentXP: 0,
+      currentLevel: 1,
+      levelupStats: defaultStats(),
+    },
   };
 }
 
@@ -31,6 +51,7 @@ export function defaultStats(): StatBlock {
     CritChance: 0,
     CritDamage: 0,
     AttackSpeed: 0,
+    AttackRange: 0,
     ProjectileCount: 0,
     ProjectileSpeed: 0,
     ProjectileBounces: 0,

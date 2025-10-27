@@ -133,5 +133,6 @@ function ensureWeapon(weapon: Partial<WeaponContent>): Required<WeaponContent> {
     baseStats: ensureStats(weapon.baseStats),
     upgradeableStats: weapon.upgradeableStats ?? [],
     unlockCost: weapon.unlockCost ?? 0,
+    range: weapon.range ?? 1,
   };
 }

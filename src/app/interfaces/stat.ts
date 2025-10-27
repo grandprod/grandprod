@@ -10,6 +10,7 @@ export type BaseStat =
   | 'CritChance'
   | 'CritDamage'
   | 'AttackSpeed'
+  | 'AttackRange'
   | 'ProjectileCount'
   | 'ProjectileSpeed'
   | 'ProjectileBounces'

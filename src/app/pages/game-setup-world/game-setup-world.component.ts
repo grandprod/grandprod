@@ -7,10 +7,12 @@ import { IconHeroComponent } from '@components/icon-hero/icon-hero.component';
 import { IconWeaponComponent } from '@components/icon-weapon/icon-weapon.component';
 import { SFXDirective } from '@directives/sfx.directive';
 import {
+  creatorPlayerHeroToGameEntityPlayer,
   discordSetStatus,
   gameReset,
   getEntriesByType,
   getEntry,
+  setPlayer,
   setWorldSeed,
 } from '@helpers';
 import type { GameStat, WeaponContent } from '@interfaces';
@@ -64,8 +66,14 @@ export class GameSetupWorldComponent implements OnInit {
   }
 
   public async createWorld() {
+    const hero = this.chosenHero();
+    if (!hero) return;
+
     gameReset();
     setWorldSeed(this.worldSeed());
+
+    const createdHero = creatorPlayerHeroToGameEntityPlayer(hero);
+    setPlayer(createdHero);
 
     await this.router.navigate(['/setup', 'generate']);
   }

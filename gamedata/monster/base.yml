@@ -23,10 +23,12 @@
   baseStats:
     Health: 7
     Damage: 2
+    MovementSpeed: 0.2
 
   statsPerLevel:
     Health: 0.5
     Damage: 0.1
+    MovementSpeed: 0.05
 
 - id: d7b75e59-3309-44e0-a293-cf5f9303658a
   name: Hobgoblin
@@ -38,10 +40,12 @@
   baseStats:
     Health: 15
     Damage: 3
+    MovementSpeed: 0.3
 
   statsPerLevel:
     Health: 1
     Damage: 0.15
+    MovementSpeed: 0.05
 
 - id: 5b4508dc-b7ac-4089-8d30-95fd94f8824e
   name: Ogre
@@ -53,7 +57,9 @@
   baseStats:
     Health: 100
     Damage: 10
+    MovementSpeed: 0.01
 
   statsPerLevel:
     Health: 2
     Damage: 1
+    MovementSpeed: 0.01

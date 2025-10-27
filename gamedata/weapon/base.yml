@@ -8,6 +8,7 @@
     Damage: 5.0
     ProjectileCount: 1.0
     AttackSpeed: 1.0
+    range: 2.0
 
   upgradeableStats:
     - Damage
@@ -26,6 +27,7 @@
     ProjectileBounces: 2.0
     AttackSpeed: 1.0
     Knockback: 2.0
+    range: 4.0
 
   upgradeableStats:
     - Damage

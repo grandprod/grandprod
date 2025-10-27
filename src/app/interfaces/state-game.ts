@@ -1,8 +1,12 @@
+import type { GameEntity, GameEntityPlayer } from '@interfaces/game-entity';
 import type { Branded } from '@interfaces/identifiable';
 
 export type GameId = Branded<string, 'GameId'>;
 
-export interface GameStateWorld {}
+export interface GameStateWorld {
+  entities: GameEntity[];
+  currentStage: number;
+}
 
 export interface GameStateClock {
   numTicks: number;
@@ -21,4 +25,5 @@ export interface GameState {
   gameId: GameId;
   clock: GameStateClock;
   world: GameStateWorld;
+  player: GameEntityPlayer;
 }

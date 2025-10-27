@@ -65,7 +65,7 @@ export class GamestateService {
 
     runLoop(1);
 
-    interval(1000).subscribe(() => {
+    interval(100).subscribe(() => {
       if (lastRunTime <= 0 || !this.hasLoaded()) return;
 
       if (!isPageVisible() && !getOption('debugAllowBackgroundOperations')) {
