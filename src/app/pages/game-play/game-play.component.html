@@ -1,3 +1,11 @@
-<div class="game-container relative">hewwo game player</div>
+<div class="game-container relative">
+  <div class="grid grid-cols-12 gap-2 p-2">
+    <div class="col-span-9">
+      <app-play-monsters></app-play-monsters>
+    </div>
 
-<ng-container [appTeleportOutlet]="'menu-options'"></ng-container>
+    <div class="col-span-3">
+      <app-play-stats></app-play-stats>
+    </div>
+  </div>
+</div>
