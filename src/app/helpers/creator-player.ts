@@ -9,6 +9,7 @@ export function creatorPlayerHeroToGameEntityPlayer(
     heroId: hero.id,
     type: 'Player',
     name: hero.name,
+    distanceFromPlayer: 0,
     currentHP: hero.baseStats.Health,
     currentStats: hero.baseStats,
     currentXP: 0,

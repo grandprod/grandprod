@@ -24,6 +24,27 @@
     <div class="w-full">
       <div class="card bg-base-100">
         <div class="card-body items-center justify-between">
+          <div class="card-title text-center flex flex-col">Choose a Stage</div>
+
+          <div class="card-actions pt-3 flex flex-row gap-2">
+            <div class="flex flex-row gap-2 flex-wrap">
+              @for (stage of allStages(); track $index) {
+                <app-icon-stage
+                  [stage]="stage"
+                  (click)="chooseStage(stage)"
+                  class="cursor-pointer border border-gray-200 bg-gray-600"
+                  [class.border-primary]="chosenStage() === stage"
+                ></app-icon-stage>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <div class="card bg-base-100">
+        <div class="card-body items-center justify-between">
           <div class="card-title text-center flex flex-col">World Seed</div>
 
           <div
@@ -48,7 +69,7 @@
         <div class="card-body items-center justify-between">
           <button
             class="btn btn-primary btn-block"
-            [disabled]="!chosenHero()"
+            [disabled]="!chosenHero() || !chosenStage()"
             (click)="createWorld()"
             appSfx="ui-click"
             [sfxTrigger]="['click', 'hover']"

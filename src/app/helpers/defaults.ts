@@ -22,19 +22,21 @@ export function defaultGameState(): GameState {
     },
     world: {
       entities: [],
-      currentStage: 1,
+      currentStageLevel: 1,
     },
     player: {
       id: '' as GameEntityId,
       heroId: '' as HeroId,
       name: 'Player',
       type: 'Player',
+      distanceFromPlayer: 0,
       currentHP: 100,
       currentStats: defaultStats(),
       currentXP: 0,
       currentLevel: 1,
       levelupStats: defaultStats(),
     },
+    stageId: '',
   };
 }
 

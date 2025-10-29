@@ -5,7 +5,7 @@ export type GameId = Branded<string, 'GameId'>;
 
 export interface GameStateWorld {
   entities: GameEntity[];
-  currentStage: number;
+  currentStageLevel: number;
 }
 
 export interface GameStateClock {
@@ -26,4 +26,5 @@ export interface GameState {
   clock: GameStateClock;
   world: GameStateWorld;
   player: GameEntityPlayer;
+  stageId: string;
 }

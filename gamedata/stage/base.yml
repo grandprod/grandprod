@@ -1,3 +1,19 @@
 - id: 27dd9e3a-96e0-4328-ab7e-90ccd84722fc
   name: Plains
   description: Rolling hills and open fields.
+
+  spawnableMonsters:
+    - difficulty: 0
+      monsterId: Goblin
+
+    - difficulty: 3
+      monsterId: Kobold
+
+    - difficulty: 10
+      monsterId: Hobgoblin
+
+  minibossMonsters: []
+
+  bossMonsters:
+    - difficulty: 0
+      monsterId: Ogre

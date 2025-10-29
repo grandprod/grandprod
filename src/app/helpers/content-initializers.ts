@@ -105,6 +105,9 @@ function ensureStage(stage: Partial<StageContent>): Required<StageContent> {
     name: stage.name ?? 'UNKNOWN',
     __type: 'stage',
     description: stage.description ?? 'UNKNOWN',
+    bossMonsters: stage.bossMonsters ?? [],
+    minibossMonsters: stage.minibossMonsters ?? [],
+    spawnableMonsters: stage.spawnableMonsters ?? [],
   };
 }
 

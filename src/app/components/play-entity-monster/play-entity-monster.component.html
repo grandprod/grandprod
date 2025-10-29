@@ -1,0 +1,9 @@
+@let monsterData = monster();
+
+<div class="card bg-base-200">
+  <div class="card-body">
+    <app-icon-monster [monster]="monsterRef()"></app-icon-monster>
+
+    <strong class="font-bold">{{ monsterData.name }}</strong>
+  </div>
+</div>

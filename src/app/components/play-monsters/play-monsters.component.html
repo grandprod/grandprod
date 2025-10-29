@@ -1,0 +1,21 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="grid grid-cols-6 gap-2">
+      @for (entity of allEntities(); track $index) {
+        @switch (entity.type) {
+          @case ('Monster') {
+            <app-play-entity-monster
+              [entity]="entity"
+            ></app-play-entity-monster>
+          }
+
+          @default {
+            Unknown entity type: {{ entity.type }}
+          }
+        }
+      } @empty {
+        Nothing coming... yet!
+      }
+    </div>
+  </div>
+</div>

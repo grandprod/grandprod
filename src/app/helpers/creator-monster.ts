@@ -12,6 +12,7 @@ export function creatorMonsterContentToGameEntityMonster(
     id: rngUuid() as GameEntityId,
     name: content.name,
     type: 'Monster',
+    monsterId: content.id,
     currentHP: content.baseStats.Health,
     currentStats: content.baseStats,
     distanceFromPlayer: 10,

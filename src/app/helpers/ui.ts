@@ -4,6 +4,8 @@ export function isPageVisible(): boolean {
   return !document.hidden;
 }
 
+export const statusText = signal<string>('');
+
 export const windowHeight = signal<number>(window.innerHeight);
 export const windowWidth = signal<number>(window.innerWidth);
 

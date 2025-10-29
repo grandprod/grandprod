@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContentNameComponent } from '@components/content-name/content-name.component';
 import { IconHeroComponent } from '@components/icon-hero/icon-hero.component';
+import { IconStageComponent } from '@components/icon-stage/icon-stage.component';
 import { IconWeaponComponent } from '@components/icon-weapon/icon-weapon.component';
 import { SFXDirective } from '@directives/sfx.directive';
 import {
@@ -13,9 +14,10 @@ import {
   getEntriesByType,
   getEntry,
   setPlayer,
+  setStage,
   setWorldSeed,
 } from '@helpers';
-import type { GameStat, WeaponContent } from '@interfaces';
+import type { GameStat, StageContent, WeaponContent } from '@interfaces';
 import { type HeroContent } from '@interfaces';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -28,6 +30,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     IconHeroComponent,
     ContentNameComponent,
     IconWeaponComponent,
+    IconStageComponent,
   ],
   templateUrl: './game-setup-world.component.html',
   styleUrl: './game-setup-world.component.scss',
@@ -38,8 +41,11 @@ export class GameSetupWorldComponent implements OnInit {
   public worldSeed = signal<string | undefined>(undefined);
 
   public chosenHero = signal<HeroContent | undefined>(undefined);
+  public chosenStage = signal<StageContent | undefined>(undefined);
 
   public allHeroes = computed(() => getEntriesByType<HeroContent>('hero'));
+  public allStages = computed(() => getEntriesByType<StageContent>('stage'));
+
   public heroWeapons = computed(
     () =>
       (this.chosenHero()?.startingWeaponIds ?? []).map((weaponId) =>
@@ -65,15 +71,22 @@ export class GameSetupWorldComponent implements OnInit {
     this.chosenHero.set(hero);
   }
 
+  public chooseStage(stage: StageContent) {
+    this.chosenStage.set(stage);
+  }
+
   public async createWorld() {
     const hero = this.chosenHero();
-    if (!hero) return;
+    const stage = this.chosenStage();
+    if (!hero || !stage) return;
 
     gameReset();
     setWorldSeed(this.worldSeed());
 
     const createdHero = creatorPlayerHeroToGameEntityPlayer(hero);
     setPlayer(createdHero);
+
+    setStage(stage);
 
     await this.router.navigate(['/setup', 'generate']);
   }

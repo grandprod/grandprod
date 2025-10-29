@@ -4,7 +4,7 @@
       @for (stat of allStats(); track $index) {
         <li>
           <strong>{{ stat.name }}:</strong>
-          {{ stat.value }}
+          {{ stat.value | number: '1.0-3' }}
         </li>
       }
     </ol>

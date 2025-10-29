@@ -6,6 +6,7 @@ import { gameloopMoveMonsters } from '@helpers/gameloop-movemonsters';
 import { gameloopPlayerAttack } from '@helpers/gameloop-playerattack';
 import { gameloopSpawnInteractables } from '@helpers/gameloop-spawninteractables';
 import { gameloopSpawnMonsters } from '@helpers/gameloop-spawnmonsters';
+import { gameloopUI, gameloopUIAlwaysRun } from '@helpers/gameloop-ui';
 import { debug } from '@helpers/logging';
 import { playerStatIncrease } from '@helpers/player';
 import { schedulerYield } from '@helpers/scheduler';
@@ -30,6 +31,8 @@ export function gameloopShouldRun(): boolean {
 export async function gameloop(totalTicks: number): Promise<void> {
   if (!isSetup()) return;
   if (!isGameStateReady()) return;
+  gameloopUIAlwaysRun();
+
   if (!gameloopShouldRun()) return;
   if (isGameloopPaused()) return;
 
@@ -45,6 +48,7 @@ export async function gameloop(totalTicks: number): Promise<void> {
 
   timer.startTimer('gameloop');
 
+  gameloopUI();
   gameloopPlayerAttack();
   gameloopMonsterAttack();
   gameloopMoveMonsters();

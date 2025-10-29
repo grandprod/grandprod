@@ -19,6 +19,6 @@ export async function worldgenGenerateWorld(): Promise<
   return {
     didFinish: true,
     entities: [],
-    currentStage: 1,
+    currentStageLevel: 1,
   };
 }

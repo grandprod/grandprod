@@ -1,4 +1,5 @@
 import type { HeroId } from '@interfaces/content-hero';
+import type { MonsterId } from '@interfaces/content-monster';
 import type { Branded } from '@interfaces/identifiable';
 import type { StatBlock } from '@interfaces/stat';
 
@@ -12,6 +13,8 @@ export interface GameEntity {
   name: string;
 
   type: GameEntityType;
+
+  distanceFromPlayer: number;
 }
 
 export type GameEntityCharacter = GameEntity & {
@@ -22,7 +25,7 @@ export type GameEntityCharacter = GameEntity & {
 export type GameEntityMonster = GameEntityCharacter & {
   type: 'Monster';
 
-  distanceFromPlayer: number;
+  monsterId: MonsterId;
 };
 
 export type GameEntityPlayer = GameEntityCharacter & {

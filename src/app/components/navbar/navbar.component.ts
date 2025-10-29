@@ -16,6 +16,7 @@ import {
   saveGameState,
   setOption,
   showOptionsMenu,
+  statusText,
 } from '@helpers';
 import type { Icon } from '@interfaces';
 import { TippyDirective } from '@ngneat/helipopper';
@@ -52,6 +53,7 @@ export class NavbarComponent {
 
   public leaveSwal = viewChild<SwalComponent>('leaveSwal');
 
+  public statusText = computed(() => statusText());
   public isPaused = computed(() => getOption('gameloopPaused'));
 
   public readonly panelConfigs: Array<{
