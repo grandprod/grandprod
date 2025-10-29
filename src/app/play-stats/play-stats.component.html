@@ -1,0 +1,12 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <ol>
+      @for (stat of allStats(); track $index) {
+        <li>
+          <strong>{{ stat.name }}:</strong>
+          {{ stat.value }}
+        </li>
+      }
+    </ol>
+  </div>
+</div>
